@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow">
+    <meta name="description" content="Explore captivating interactive stories and adventures on the Interactive Story blog.">
+    <meta name="keywords" content="interactive stories, blog, storytelling, adventures, fiction">
+    <meta name="author" content="Interactive Story">
+    <title>Interactive Story - Blog</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 font-serif antialiased">
+    <!-- Header -->
+    <header class="bg-white shadow-sm">
+        <div class="container mx-auto px-4 py-6 flex justify-between items-center">
+            <div>
+                <a href="/index.html" class="text-3xl font-bold text-gray-900">Interactive Story</a>
+            </div>
+            <nav>
+                <a href="/index.html" class="text-gray-600 hover:text-blue-600 mx-4">Home</a>
+                <a href="#" class="text-gray-600 hover:text-blue-600 mx-4">Categories</a>
+                <a href="#" class="text-gray-600 hover:text-blue-600 mx-4">About</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Blog Posts Section -->
+    <section class="container mx-auto px-4 py-12">
+        <div id="blog-posts" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Blog posts will be dynamically inserted here -->
+        </div>
+        <div class="text-center mt-12">
+            <button id="load-more" class="bg-gray-900 text-white px-6 py-3 rounded-full hover:bg-gray-700 transition font-medium">Load More Stories</button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-200 py-8">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-sm">&copy; 2025 Interactive Story. All rights reserved.</p>
+            <div class="mt-4 space-x-4">
+                <a href="#" class="text-gray-400 hover:text-white">Privacy Policy</a>
+                <a href="#" class="text-gray-400 hover:text-white">Terms of Service</a>
+                <a href="#" class="text-gray-400 hover:text-white">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Sample blog post data with image placeholders
+        const blogPosts = [
+            { 
+                title: "SeductiveUtopia.net: The Luxury Underwear Boutique for Every Desire", 
+                excerpt: "SeductiveUtopia.net is a bold, inclusive fashion destination specializing in designer men’s underwear, body-positive lingerie, and sexy swimwear for all identities. With a focus on luxury, empowerment, and expressive style, Seductive Utopia's flagship online store curates intimate apparel that celebrates individuality and redefines seduction through inclusive sizing, provocative design, and unapologetic confidence.", 
+                date: "August 31, 2025", 
+                image: "https://seductiveutopia.net/cdn/shop/collections/private_structure_2025.jpg?v=1750091507&width=750",
+                url: "/body-positive-intimate-apparel.html",
+            },
+        ];
+
+        let displayedPosts = 0;
+        const postsPerLoad = 3;
+
+        // Function to render blog posts
+        function renderPosts() {
+            const blogContainer = document.getElementById('blog-posts');
+            const postsToShow = blogPosts.slice(displayedPosts, displayedPosts + postsPerLoad);
+
+            postsToShow.forEach(post => {
+                const postElement = document.createElement('div');
+                postElement.className = 'bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition';
+                postElement.innerHTML = `
+                    <img src="${post.image}" alt="${post.title}" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h2 class="text-xl font-semibold text-gray-900 mb-2">${post.title}</h2>
+                        <p class="text-gray-600 mb-4 line-clamp-3">${post.excerpt}</p>
+                        <p class="text-sm text-gray-500 mb-4">Posted on ${post.date}</p>
+                        <a href="${post.url}" class="text-blue-600 hover:underline font-medium">Read Story &rarr;</a>
+                    </div>
+                `;
+                blogContainer.appendChild(postElement);
+            });
+
+            displayedPosts += postsToShow.length;
+
+            // Hide load more button if all posts are displayed
+            if (displayedPosts >= blogPosts.length) {
+                document.getElementById('load-more').style.display = 'none';
+            }
+        }
+
+        // Initial render
+        renderPosts();
+
+        // Load more button event listener
+        document.getElementById('load-more').addEventListener('click', renderPosts);
+    </script>
+</body>
+</html>
